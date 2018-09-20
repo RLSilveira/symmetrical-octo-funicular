@@ -675,3 +675,81 @@
 	"ImageClassNew3.h"
 	"BmpLib0.h"
 
+1537402001 source:d:\pucrs\computacao grafica 2\2018-2\symmetrical-octo-funicular\t1-2018-2\video\aviclass.cpp
+	<iostream>
+	"AVIClass.h"
+
+1537402001 d:\pucrs\computacao grafica 2\2018-2\symmetrical-octo-funicular\t1-2018-2\video\aviclass.h
+	<GL\gl.h>
+	<GL\glut.h>
+	"IM/include/im.h"
+	"IM/include/im_util.h"
+	"IM/include/im_format_avi.h"
+	"IM/include/im_format_wmv.h"
+	"IM/include/im_convert.h"
+	"ImageClassNew3.h"
+
+1537402001 d:\pucrs\computacao grafica 2\2018-2\symmetrical-octo-funicular\t1-2018-2\video\include\gl\glut.h
+	"freeglut.h"
+
+1537402001 d:\pucrs\computacao grafica 2\2018-2\symmetrical-octo-funicular\t1-2018-2\video\include\gl\freeglut.h
+	"freeglut_std.h"
+	"freeglut_ext.h"
+
+1537402001 d:\pucrs\computacao grafica 2\2018-2\symmetrical-octo-funicular\t1-2018-2\video\include\gl\freeglut_std.h
+	<windows.h>
+	<GL/gl.h>
+	<GL/glu.h>
+
+1537402001 d:\pucrs\computacao grafica 2\2018-2\symmetrical-octo-funicular\t1-2018-2\video\include\gl\freeglut_ext.h
+
+1537402001 d:\pucrs\computacao grafica 2\2018-2\symmetrical-octo-funicular\t1-2018-2\video\include\im\include\im.h
+	"old_im.h"
+
+1537402001 d:\pucrs\computacao grafica 2\2018-2\symmetrical-octo-funicular\t1-2018-2\video\include\im\include\old_im.h
+
+1537402001 d:\pucrs\computacao grafica 2\2018-2\symmetrical-octo-funicular\t1-2018-2\video\include\im\include\im_util.h
+
+1537402001 d:\pucrs\computacao grafica 2\2018-2\symmetrical-octo-funicular\t1-2018-2\video\include\im\include\im_format_avi.h
+
+1537402001 d:\pucrs\computacao grafica 2\2018-2\symmetrical-octo-funicular\t1-2018-2\video\include\im\include\im_format_wmv.h
+
+1537402001 d:\pucrs\computacao grafica 2\2018-2\symmetrical-octo-funicular\t1-2018-2\video\include\im\include\im_convert.h
+	"im_image.h"
+
+1537402001 d:\pucrs\computacao grafica 2\2018-2\symmetrical-octo-funicular\t1-2018-2\video\include\im\include\im_image.h
+
+1537402001 d:\pucrs\computacao grafica 2\2018-2\symmetrical-octo-funicular\t1-2018-2\video\imageclassnew3.h
+	<GL\gl.h>
+
+1537402001 source:d:\pucrs\computacao grafica 2\2018-2\symmetrical-octo-funicular\t1-2018-2\video\bmplib0.cpp
+	<stdio.h>
+	<malloc.h>
+	"BmpLib0.h"
+
+1537402001 d:\pucrs\computacao grafica 2\2018-2\symmetrical-octo-funicular\t1-2018-2\video\bmplib0.h
+
+1537402001 source:d:\pucrs\computacao grafica 2\2018-2\symmetrical-octo-funicular\t1-2018-2\video\cameraclass.cpp
+	<iostream>
+	"CameraClass.h"
+
+1537402001 d:\pucrs\computacao grafica 2\2018-2\symmetrical-octo-funicular\t1-2018-2\video\cameraclass.h
+	"im_capture.h"
+	"ImageClassNew3.h"
+
+1537402001 d:\pucrs\computacao grafica 2\2018-2\symmetrical-octo-funicular\t1-2018-2\video\im_capture.h
+
+1537402001 source:d:\pucrs\computacao grafica 2\2018-2\symmetrical-octo-funicular\t1-2018-2\video\imageclassnew3.cpp
+	<stdio.h>
+	<stdlib.h>
+	<windows.h>
+	<math.h>
+	<GL\gl.h>
+	"ImageClassNew3.h"
+	"BmpLib0.h"
+
+1537479398 source:d:\pucrs\computacao grafica 2\2018-2\symmetrical-octo-funicular\t1-2018-2\video\avitest-three.cpp
+	<cstdlib>
+	<iostream>
+	"AVIClass.h"
+

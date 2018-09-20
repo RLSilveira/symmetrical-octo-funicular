@@ -38,7 +38,7 @@ AVIClass Video;
 // **********************************************************************
 void init(void)
 {
-cout << "Init..." ;
+    cout << "Init..." ;
     glClearColor(0.0f, 0.0f, 1.0f, 1.0f); // Fundo de tela preto
 
     imFormatRegisterAVI();
@@ -132,7 +132,7 @@ void SaltAndPepper(AVIClass V)
         for(int y = 1; y < V.SizeY() - 1; y++){
             MontaVetor(x, y, win, V);
             OrdenaVetor(win);
-            V.DrawPixel(x, y, win[5]);
+            //V.DrawPixel(x, y, win[5]);
         }
     }
 }
