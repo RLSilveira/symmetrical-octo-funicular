@@ -1,13 +1,13 @@
 // **********************************************************************
 // PUCRS/FACIN
-// COMPUTA«√O GR¡FICA
+// COMPUTA√á√ÉO GR√ÅFICA
 //
 // Arquivo: AVITest.cpp
 //
-// Programa de testes para carga de Imagens e vÌdeos AVI
+// Programa de testes para carga de Imagens e v√≠deos AVI
 //
 //  Este programa deve ser compilador junto com a classe "ImageClass",
-//  que est· implementada no arquivo "ImageClass.cpp"
+//  que est√° implementada no arquivo "ImageClass.cpp"
 //
 //  Para a carga das imagens este programa utiliza a biblioteca
 //  IM http://www.tecgraf.puc-rio.br/im de autoria de Antonio Scuri
@@ -23,15 +23,17 @@ using namespace std;
 
 #include "AVIClass.h"
 
+int intensidade = 215;
+int red = 15;
 int cinza = false;
-int removeRuido = false;
-
+int ruido = false;
+int square = false;
 
 AVIClass Video;
 
 // **********************************************************************
 //  void init(void)
-//  Inicializa os par‚metros globais de OpenGL
+//  Inicializa os par√¢metros globais de OpenGL
 //
 // **********************************************************************
 void init(void)
@@ -41,8 +43,8 @@ cout << "Init..." ;
 
     imFormatRegisterAVI();
     //imFormatRegisterWMV();
-    //if(Video.openVideoFile("Videos\\VideoDemo.avi") == 0)
     if(Video.openVideoFile("Videos\\VideoBike.avi") == 0)
+    //if(Video.openVideoFile("Videos\\video_original.avi") == 0)
     {
        cout << "Problemas na abertura do video" << endl;
     }
@@ -93,13 +95,12 @@ void ConverteCinza(AVIClass V)
         {
             i = V.GetPointIntensity(x,y);
             //Img->ReadPixel(x,y, r,g,b);
-            if (i> 225)
+            if (i> intensidade)
               V.DrawPixel(x, y,255,255,255);
             else V.DrawPixel(x, y,255,0,0);
         }
     }
 }
-
 
 void OrdenaVetor(int window[])
 {
@@ -113,38 +114,60 @@ void OrdenaVetor(int window[])
     }
 }
 
-void MontaVetor(int xP, int yP, int vetor[], AVIClass V){
-
+void MontaVetor(int xP, int yP, int vetor[], AVIClass V)
+{
     int idxV = 0;
-    for(int x=xP-1;x<=xP+1;x++)
-    {
-        for(int y=yP-1;y<=yP+1;y++)
-        {
+    for(int x = xP - 1; x <= xP + 1; x++){
+        for(int y = yP - 1; y <= yP + 1; y++){
             vetor[idxV++] = V.GetPointIntensity(x,y);
         }
     }
 }
 
-void RemoveRuido(AVIClass V)
+void SaltAndPepper(AVIClass V)
 {
+    int win[9];
 
-    int x,y;
-    int i;
-    unsigned char r,g,b;
-    //cout << "Iniciou Black & White....";
-    //NovaImagem->DrawPixel(20, 1,100,255,0,0 );
-
-    int Vetor[9];
-    for(x=1;x<V.SizeX() -1;x++)
-    {
-        for(y=1;y<V.SizeY() -1;y++)
-        {
-            MontaVetor(x,y, Vetor, V); // Coloca em VETOR os valores das intensidades ao redor do ponto x,y.
-            OrdenaVetor(Vetor);
-            int mediana = Vetor[5];
-            V[x][y] = mediana;
+    for(int x = 1; x < V.SizeX() - 1; x++){
+        for(int y = 1; y < V.SizeY() - 1; y++){
+            MontaVetor(x, y, win, V);
+            OrdenaVetor(win);
+            V.DrawPixel(x, y, win[5]);
         }
     }
+}
+
+bool verificaPontosAoRedor(int xP, int yP, AVIClass V, int redor){
+    for(int x = xP - redor; x <= xP + redor; x++){
+        for(int y = yP - redor; y <= yP + redor; y++){
+                if(V.GetPointIntensity(x, y) != V.GetPointIntensity(xP, yP)){
+                    return false;
+                }
+        }
+    }
+    return true;
+}
+
+void Square(AVIClass V, int redor){
+    int c = 0;
+    for(int x = redor; x < V.SizeX() - redor; x++){
+        for(int y = redor; y < V.SizeY() - redor; y++){
+            if(V.GetPointIntensity(x,y) < intensidade){
+                if(verificaPontosAoRedor(x, y, V, redor)){
+                    //V.DrawBox(x-redor, y-redor, x+redor, y+redor, 0, 0, 0);
+                    //V.DrawLineH(y, x-redor, x+redor, 0, 0, 0);
+                    //V.DrawLineV(x, y-redor, y+redor, 0, 0, 0);
+                    c++;
+                    //V.DrawLineH(y, 100, 100, 0, 0, 0);
+                    //V.DrawLineV(x, 100, 100, 0, 0, 0);
+                    V.DrawBox( x, y, 20, 20, 255,255,0);
+                    cout << "ACHOU NOS PONTOS " << x << ", " << y << "\t" << c << endl;
+                }
+            }
+        }
+    }
+
+
 }
 
 // **********************************************************************
@@ -179,10 +202,10 @@ void display( void )
 	glLoadIdentity();
 
     loadFrameOK = Video.loadImageFrame(frame);
-    // avanÁa o nro do frame
+    // avan√ßa o nro do frame
     frame ++;
     cout << "Frame: " << frame << endl;
-    // se atingiu o final do vÌdeo, ent„o recomeÁa
+    // se atingiu o final do v√≠deo, ent√£o recome√ßa
     if (frame == Video.getTotalFrames())
     {
          frame = 0;
@@ -198,13 +221,17 @@ void display( void )
        CalculaNivelDeZoom(ZoomH, ZoomV);
        Video.SetZoomH(ZoomH);
        Video.SetZoomV(ZoomV);
+       if(ruido)
+       {
+            SaltAndPepper(Video);
+            SaltAndPepper(Video);
+       }
+       if(square){
+            Square(Video, red);
+       }
        if (cinza)
        {
           ConverteCinza(Video);
-       }
-       if (removeRuido)
-       {
-          RemoveRuido(Video);
        }
        Video.Display();
     }
@@ -224,12 +251,15 @@ void keyboard ( unsigned char key, int x, int y )
 
     switch ( key )
     {
-        case 'r' :
-                removeRuido = !cinza;
-                glutPostRedisplay();
-                break;
-
         case 'c': cinza = !cinza;
+                  glutPostRedisplay();
+                  break;
+
+        case 'r': ruido = !ruido;
+                  glutPostRedisplay();
+                  break;
+
+        case 's': square = !square;
                   glutPostRedisplay();
                   break;
 
@@ -264,7 +294,6 @@ void arrow_keys ( int a_keys, int x, int y )
     }
 }
 
-
 // **********************************************************************
 //  void main ( int argc, char** argv )
 //
@@ -278,7 +307,7 @@ int main ( int argc, char** argv )
     glutInitDisplayMode (GLUT_DOUBLE | GLUT_DEPTH | GLUT_RGB );
     glutInitWindowPosition (300,10);
 
-    // Define o tamanho da janela gr·fica do programa
+    // Define o tamanho da janela gr√°fica do programa
     glutInitWindowSize  ( 640, 480);
     glutCreateWindow    ( "AVI Loader - v2.0" );
 
@@ -288,13 +317,12 @@ int main ( int argc, char** argv )
     glutSpecialFunc ( arrow_keys );
     //glutIdleFunc ( display );
 
-    MessageBox(NULL, "Pressione a barra de espaÁo para avancar o vÌdeo.", "Mensagem", MB_OK);
-    cout << "Pressione a barra de espaÁo para avancar o vÌdeo." << endl;
+    MessageBox(NULL, "Pressione a barra de espa√ßo para avancar o v√≠deo.", "Mensagem", MB_OK);
+    cout << "Pressione a barra de espa√ßo para avancar o v√≠deo." << endl;
 
     glutMainLoop ();
     cout <<"FIM\n";
 
     return 0;
 }
-
 
